@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pixel Canvas</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="pixelCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById("pixelCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    // Размер холста
+    canvas.width = 1000;
+    canvas.height = 2000;
+    
+    // Заливка чёрным
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Клик для теста
+    canvas.addEventListener("click", (e) => {
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(e.offsetX, e.offsetY, 1, 1);
+    });
+  </script>
+</body>
+</html>
