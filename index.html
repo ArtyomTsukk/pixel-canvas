@@ -3,28 +3,47 @@
 <head>
   <title>Pixel Canvas</title>
   <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f0f0f0;
+      overflow: hidden;
+    }
+    #container {
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
-  <canvas id="pixelCanvas"></canvas>
+  <div id="container">
+    <canvas id="pixelCanvas"></canvas>
+  </div>
+
   <script>
     const canvas = document.getElementById("pixelCanvas");
     const ctx = canvas.getContext("2d");
     
     // Размер холста
-    canvas.width = 1000;
-    canvas.height = 2000;
+    const size = 1000;
+    canvas.width = size;
+    canvas.height = size;
     
-    // Заливка чёрным
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Заливка белым
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, size, size);
     
-    // Клик для теста
+    // Рисование пикселей
     canvas.addEventListener("click", (e) => {
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(e.offsetX, e.offsetY, 1, 1);
+      const rect = canvas.getBoundingClientRect();
+      const x = Math.floor(e.clientX - rect.left);
+      const y = Math.floor(e.clientY - rect.top);
+      
+      // Закрашиваем пиксель (цвет можно менять)
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(x, y, 1, 1);
     });
   </script>
 </body>
