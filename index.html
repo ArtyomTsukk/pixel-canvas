@@ -1,50 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Pixel Canvas</title>
-    <link rel="stylesheet" href="pixel-canvas/style.css">
+  <meta charset="UTF-8" />
+  <title>Pixel Canvas</title>
+  <style>
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-    <h1>Онлайн холст для пиксельного искусства</h1>
-    <canvas id="canvas" width="1000" height="1000"></canvas>
-
-    <script>
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-
-        const pixelSize = 10; // размер одного пикселя 10x10
-        const rows = canvas.height / pixelSize;
-        const cols = canvas.width / pixelSize;
-
-        // Рисуем сетку
-        function drawGrid() {
-            ctx.strokeStyle = "#ddd";
-            for (let x = 0; x <= canvas.width; x += pixelSize) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
-                ctx.stroke();
-            }
-            for (let y = 0; y <= canvas.height; y += pixelSize) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
-                ctx.stroke();
-            }
-        }
-
-        drawGrid();
-
-        // Рисуем пиксель по клику
-        canvas.addEventListener("click", (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = Math.floor((e.clientX - rect.left) / pixelSize) * pixelSize;
-            const y = Math.floor((e.clientY - rect.top) / pixelSize) * pixelSize;
-
-            ctx.fillStyle = "#000"; // чёрный цвет пикселя
-            ctx.fillRect(x, y, pixelSize, pixelSize);
-        });
-    </script>
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  </script>
 </body>
 </html>
