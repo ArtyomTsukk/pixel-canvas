@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Canvas</title>
+</head>
+<body style="margin:0">
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        function drawPixels(data) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            data.forEach(pixel => {
+                ctx.fillStyle = pixel.color;
+                ctx.fillRect(pixel.x, pixel.y, 1, 1);
+            });
+        }
+
+        async function loadPixels() {
+            const response = await fetch("pixels.json?" + new Date().getTime());
+            const data = await response.json();
+            drawPixels(data);
+        }
+
+        // Загружаем каждые 10 секунд
+        setInterval(loadPixels, 10000);
+        loadPixels();
+    </script>
+</body>
+</html>
