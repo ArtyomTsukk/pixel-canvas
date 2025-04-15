@@ -1,1 +1,19 @@
-<link rel="stylesheet" href="pixel-canvas/style.css">
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#canvas {
+  border: 2px solid #000;
+  display: block;
+  margin: 0 auto;
+  background-color: #fff;
+}
