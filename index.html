@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixel Canvas</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #e0e0e0, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    canvas {
+      background: white; /* белый холст */
+      border: 2px solid #333;
+      image-rendering: pixelated;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function drawPixel(x, y, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, 1, 1);
+    }
+
+    async function loadCanvas() {
+      const response = await fetch("data/canvas.json?" + Date.now()); // защита от кэша
+      const pixels = await response.json();
+
+      for (const key in pixels) {
+        const [x, y] = key.split(",").map(Number);
+        const color = pixels[key];
+        drawPixel(x, y, color);
+      }
+    }
+
+    setInterval(loadCanvas, 5000);
+    loadCanvas();
+  </script>
+</body>
+</html>
