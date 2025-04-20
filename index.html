@@ -5,20 +5,25 @@
   <title>Pixel Canvas</title>
   <style>
     html, body {
-      height: 100%;
       margin: 0;
-      padding: 0;
+      height: 100%;
       background: linear-gradient(to bottom right, #e0e0e0, #ffffff);
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     canvas {
-      background: white; /* белый холст */
+      background: white;
       border: 2px solid #333;
-      image-rendering: pixelated;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      width: 100vmin;
+      height: 100vmin;
+      max-width: 100%;
+      max-height: 100%;
     }
   </style>
 </head>
@@ -31,11 +36,11 @@
 
     function drawPixel(x, y, color) {
       ctx.fillStyle = color;
-      ctx.fillRect(x, y, 1, 1);
+      ctx.fillRect(x, y, 1, 1); // сохраняем реальный размер
     }
 
     async function loadCanvas() {
-      const response = await fetch("data/canvas.json?" + Date.now()); // защита от кэша
+      const response = await fetch("data/canvas.json?" + Date.now());
       const pixels = await response.json();
 
       for (const key in pixels) {
